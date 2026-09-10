@@ -1,21 +1,26 @@
+import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
-
-import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import data from "../data/card-data.json";
 const ExploreTech = () => {
   const [stack, setStack] = useState([]);
+
   const handleClick = (id) => {
     const selectedTech = data.find((card) => card.id === id);
     setStack([...stack, selectedTech]);
+    toast.success("Tech added.");
   };
 
   const handleDelete = (id) => {
     setStack(stack.filter((tech) => tech.id !== id));
+    toast.success("Tech removed.");
   };
 
   const handleReset = () => {
     setStack([]);
+    toast.success("All tech removed.");
   };
   return (
     <section className="mt-16 flex flex-col gap-10 px-[7%] text-white">
@@ -27,8 +32,8 @@ const ExploreTech = () => {
           Pick one technology per category to build your ideal stack.
         </p>
       </div>
-      <div className="flex mt-10 gap-20">
-        <div className="w-[75%] grid grid-cols-3 gap-5">
+      <div className="flex flex-col lg:flex-row mt-10 gap-20">
+        <div className="w-full lg:w-[75%] grid grid-cols-1 lg:grid-cols-3 gap-5">
           {data.map((card) => (
             <div
               key={card.id}
@@ -63,7 +68,7 @@ const ExploreTech = () => {
             </div>
           ))}
         </div>
-        <div className="w-[25%]">
+        <div className="w-full lg:w-[25%]">
           <div className="bg-surface-raised border border-border-bright rounded-xl p-3">
             <h5 className="text-3xl font-semibold">Your Stack</h5>
             {stack.length == 0 ? (
@@ -102,6 +107,16 @@ const ExploreTech = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        theme="dark"
+        hideProgressBar={false}
+        closeOnClick={false}
+        pauseOnHover
+        draggable
+        limit={4}
+      />
     </section>
   );
 };
