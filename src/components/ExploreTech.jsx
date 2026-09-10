@@ -1,13 +1,8 @@
 import { useState } from "react";
-
 import { FaStar } from "react-icons/fa";
-
 import { RxCross2 } from "react-icons/rx";
-
 import { ToastContainer, toast } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
-
 import data from "../data/card-data.json";
 
 const ExploreTech = () => {

@@ -18,15 +18,11 @@ const Footer = () => {
             <button className="cursor-pointer hover:text-white transition-colors">
               GitHub
             </button>
-
             <BsDot className="lg:hidden" />
-
             <button className="cursor-pointer hover:text-white transition-colors">
               Twitter
             </button>
-
             <BsDot className="lg:hidden" />
-
             <button className="cursor-pointer hover:text-white transition-colors">
               LinkeDin
             </button>

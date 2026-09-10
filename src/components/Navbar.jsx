@@ -1,5 +1,4 @@
 import { IoMenu } from "react-icons/io5";
-
 import Logo from "./Logo";
 
 const Navbar = () => {
