@@ -1,20 +1,15 @@
 import { IoMenu } from "react-icons/io5";
+import Logo from "./Logo";
 
 const Navbar = () => {
   return (
     <header className="bg-surface text-white flex px-[7%] py-[1%] justify-between items-center border-b border-border-subtle sticky">
       {/* logo */}
-      <div className="flex justify-center items-center gap-2">
-        {/* mobile menu */}
+      <div>
         <div className="lg:hidden text-4xl">
           <IoMenu />
         </div>
-        <div className="gradient-logo font-extrabold h-8.75 w-8.75 flex justify-center items-center rounded">
-          DS
-        </div>
-        <div className="text-2xl font-bold">
-          Dev<span className="text-[#db2777]">Stack</span>
-        </div>
+        <Logo />
       </div>
       {/* navigation */}
       <nav className="hidden lg:flex">

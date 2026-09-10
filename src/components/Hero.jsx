@@ -1,7 +1,7 @@
 import banner from "../assets/banner-stack.png";
 const Hero = () => {
   return (
-    <div className="flex flex-col lg:flex-row justify-between items-center w-full px-[7%] py-[1%] mt-16">
+    <section className="flex flex-col lg:flex-row justify-between items-center w-full px-[7%] py-[1%] mt-16">
       {/* info */}
       <div className="text-white flex flex-col gap-10 w-full lg:w-[50%]">
         {/* heading */}
@@ -33,7 +33,7 @@ const Hero = () => {
       <div>
         <img src={banner} alt="" />
       </div>
-    </div>
+    </section>
   );
 };
 
