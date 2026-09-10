@@ -1,7 +1,13 @@
 import { FaStar } from "react-icons/fa";
 
+import { useState } from "react";
 import data from "../data/card-data.json";
 const ExploreTech = () => {
+  const [stack, setStack] = useState([]);
+  const handleClick = (id) => {
+    const selectedTech = data.find((card) => card.id === id);
+    setStack([...stack, selectedTech]);
+  };
   return (
     <section className="mt-16 flex flex-col gap-10 px-[7%] text-white">
       <div className="text-white ">
@@ -39,7 +45,10 @@ const ExploreTech = () => {
                 </div>
               </div>
 
-              <button className="text-white bg-zinc-800 border border-zinc-600 w-full py-2 mt-4 rounded-xl font-semibold cursor-pointer">
+              <button
+                className="text-white bg-zinc-800 border border-zinc-600 w-full py-2 mt-4 rounded-xl font-semibold cursor-pointer"
+                onClick={() => handleClick(card.id)}
+              >
                 Add to Stack
               </button>
             </div>
@@ -48,8 +57,17 @@ const ExploreTech = () => {
         <div className="w-[25%]">
           <div className="bg-surface-raised border border-border-bright rounded-xl p-3">
             <h5 className="text-3xl font-semibold">Your Stack</h5>
-
-            <div className="border border-dashed p-3 flex justify-center items-center rounded-2xl text-gray-500 mt-10">Your stack is empty</div>
+            {stack.length == 0 ? (
+              <div className="border border-dashed p-3 flex justify-center items-center rounded-2xl text-gray-500 mt-10">
+                Your stack is empty
+              </div>
+            ) : (
+              <div>
+                {stack.map((data) => (
+                  <div key={data.id}>{data.id}</div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
