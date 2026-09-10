@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #070708;
+  --color-surface: #0d0d0f;
+  --color-surface-raised: #131316;
+
+  --color-border: #27272c;
+  --color-border-subtle: #1b1b20;
+  --color-border-bright: #3a3a42;
+
+  --color-foreground: #f5f5f5;
+  --color-secondary: #b4b4bd;
+  --color-muted: #71717a;
+
+  --color-orange: #ff7a18;
+  --color-pink: #ff3d81;
+  --color-violet: #8b5cf6;
+}
+
+.gradient-logo {
+  @apply bg-gradient-to-br from-orange via-pink to-violet;
+}
+
+.activePage {
+  @apply text-[#db2777];
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-orange via-pink to-violet
+    bg-clip-text text-transparent;
+}
+
+.gradient-button {
+  @apply bg-gradient-to-r from-orange via-pink to-violet
+    text-white;
+}
