@@ -2,7 +2,7 @@ import { BsDot } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <footer className="bg-surface-raised">
+    <footer className="bg-surface-raised mt-20">
       <div className="flex justify-between bg-surface-raised px-[7%] py-[2%] ">
         <div className="text-white flex flex-col gap-3">
           <div className="rounded-lg overflow-hidden w-36 m-auto lg:ml-0">
