@@ -1,4 +1,5 @@
 import { FaStar } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
 
 import { useState } from "react";
 import data from "../data/card-data.json";
@@ -7,6 +8,14 @@ const ExploreTech = () => {
   const handleClick = (id) => {
     const selectedTech = data.find((card) => card.id === id);
     setStack([...stack, selectedTech]);
+  };
+
+  const handleDelete = (id) => {
+    setStack(stack.filter((tech) => tech.id !== id));
+  };
+
+  const handleReset = () => {
+    setStack([]);
   };
   return (
     <section className="mt-16 flex flex-col gap-10 px-[7%] text-white">
@@ -66,17 +75,26 @@ const ExploreTech = () => {
                 {stack.map((data) => (
                   <div
                     key={data.id}
-                    className="bg-zinc-800 border border-zinc-600 rounded-lg"
+                    className="bg-zinc-800 border border-zinc-600 rounded-lg flex items-center justify-between p-3"
                   >
-                    <div className="flex justify-between items-center p-3">
-                      <img className="w-7" src={data.icon} alt="" />
-                      <span className="bg-blue-200 text-blue-500 font-semibold text-sm px-2 rounded">
-                        {data.badge}
-                      </span>
+                    <div className="flex gap-2 items-center">
+                      <div className="flex justify-between items-center ">
+                        <img className="w-7" src={data.icon} alt="" />
+                      </div>
+                      <p>{data.name}</p>
                     </div>
+                    <button
+                      className="cursor-pointer"
+                      onClick={() => handleDelete(data.id)}
+                    >
+                      <RxCross2 className="text-2xl" />
+                    </button>
                   </div>
                 ))}
-                <button className="mt-5 border border-red-500 text-red-500 text-lg font-semibold py-2 rounded-lg">
+                <button
+                  className="mt-5 border border-red-500 text-red-500 text-lg font-semibold py-2 rounded-lg"
+                  onClick={() => handleReset()}
+                >
                   Remove all
                 </button>
               </div>
