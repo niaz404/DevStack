@@ -1,9 +1,9 @@
 import banner from "../assets/banner-stack.png";
 const Hero = () => {
   return (
-    <div className="flex justify-between items-center w-full px-[7%] py-[1%] mt-16">
+    <div className="flex flex-col lg:flex-row justify-between items-center w-full px-[7%] py-[1%] mt-16">
       {/* info */}
-      <div className="text-white flex flex-col gap-10 w-[50%]">
+      <div className="text-white flex flex-col gap-10 w-full lg:w-[50%]">
         {/* heading */}
         <div className="text-7xl font-bold ">
           <h1>
