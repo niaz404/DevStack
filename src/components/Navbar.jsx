@@ -3,7 +3,7 @@ import Logo from "./Logo";
 
 const Navbar = () => {
   return (
-    <header className="bg-surface text-white flex px-[7%] py-[0.75%] justify-between items-center border-b border-border-subtle sticky">
+    <header className="bg-surface text-white flex px-[7%] py-[0.75%] justify-between items-center border-b border-border-subtle fixed w-full top-0">
       {/* logo */}
       <div className="flex items-center">
         <div className="lg:hidden text-3xl mr-3">

@@ -1,30 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import data from "../data/card-data.json";
+// import data from "../data/card-data.json";
 
 const ExploreTech = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [stack, setStack] = useState([]);
 
-  const handleClick = (id) => {
+  useEffect(() => {
+    fetch("data/card-data.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  const handleClick = (id, category) => {
+    const isExist = stack.find((card) => card.category === category);
+    if (isExist) {
+      return toast.warn(`1/1 ${category} category already selected`);
+    }
     const selectedTech = data.find((card) => card.id === id);
-
     setStack([...stack, selectedTech]);
-
-    toast.success("Tech added.");
+    return toast.success("Tech added.");
   };
 
   const handleDelete = (id) => {
     setStack(stack.filter((tech) => tech.id !== id));
-
     toast.success("Tech removed.");
   };
 
   const handleReset = () => {
     setStack([]);
-
     toast.success("All tech removed.");
   };
 
@@ -42,52 +53,56 @@ const ExploreTech = () => {
 
       <div className="flex flex-col lg:flex-row mt-6 gap-8 lg:gap-10">
         <div className="w-full lg:w-[75%] grid grid-cols-1 lg:grid-cols-3 gap-5">
-          {data.map((card) => (
-            <div
-              key={card.id}
-              className="bg-surface-raised border border-border-bright rounded-xl p-4 flex flex-col justify-between"
-            >
-              <div className="flex justify-between items-center">
-                <img
-                  className="w-10 h-10 object-contain"
-                  src={card.icon}
-                  alt=""
-                />
-
-                <span className="bg-blue-200 text-blue-500 font-semibold text-xs px-2.5 py-1 rounded-md">
-                  {card.badge}
-                </span>
-              </div>
-
-              <div className="flex flex-col gap-3 mt-5">
-                <h5 className="text-xl font-semibold">{card.name}</h5>
-
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  {card.description}
-                </p>
-
-                <div className="flex gap-2 justify-between items-center text-sm">
-                  <p className="bg-gray-800 px-2.5 py-1 rounded-md">
-                    {card.category}
-                  </p>
-
-                  <p className="text-white/70">{card.difficulty}</p>
-
-                  <p className="flex justify-center items-center gap-1.5">
-                    <FaStar className="text-yellow-400" />
-                    {card.rating}
-                  </p>
-                </div>
-              </div>
-
-              <button
-                className="text-white bg-zinc-800 border border-zinc-600 w-full py-2.5 mt-5 rounded-lg font-semibold cursor-pointer hover:bg-zinc-700 transition-colors"
-                onClick={() => handleClick(card.id)}
+          {loading ? (
+            <p className="text-white text-center">Loading...</p>
+          ) : (
+            data.map((card) => (
+              <div
+                key={card.id}
+                className="bg-surface-raised border border-border-bright rounded-xl p-4 flex flex-col justify-between"
               >
-                Add to Stack
-              </button>
-            </div>
-          ))}
+                <div className="flex justify-between items-center">
+                  <img
+                    className="w-10 h-10 object-contain"
+                    src={card.icon}
+                    alt=""
+                  />
+
+                  <span className="bg-blue-200 text-blue-500 font-semibold text-xs px-2.5 py-1 rounded-md">
+                    {card.badge}
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-3 mt-5">
+                  <h5 className="text-xl font-semibold">{card.name}</h5>
+
+                  <p className="text-sm text-gray-400 leading-relaxed">
+                    {card.description}
+                  </p>
+
+                  <div className="flex gap-2 justify-between items-center text-sm">
+                    <p className="bg-gray-800 px-2.5 py-1 rounded-md">
+                      {card.category}
+                    </p>
+
+                    <p className="text-white/70">{card.difficulty}</p>
+
+                    <p className="flex justify-center items-center gap-1.5">
+                      <FaStar className="text-yellow-400" />
+                      {card.rating}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  className="text-white bg-zinc-800 border border-zinc-600 w-full py-2.5 mt-5 rounded-lg font-semibold cursor-pointer hover:bg-zinc-700 transition-colors "
+                  onClick={() => handleClick(card.id, card.category)}
+                >
+                  Add to Stack
+                </button>
+              </div>
+            ))
+          )}
         </div>
 
         <div className="w-full lg:w-[25%]">
