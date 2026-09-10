@@ -2,7 +2,7 @@ import { IoMenu } from "react-icons/io5";
 
 const Navbar = () => {
   return (
-    <header className="bg-surface text-white flex px-[7%] py-[1%] justify-between items-center">
+    <header className="bg-surface text-white flex px-[7%] py-[1%] justify-between items-center border-b border-border-subtle sticky">
       {/* logo */}
       <div className="flex justify-center items-center gap-2">
         {/* mobile menu */}
