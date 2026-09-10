@@ -3,7 +3,6 @@ import { FaStar } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import data from "../data/card-data.json";
 
 const ExploreTech = () => {
   const [data, setData] = useState([]);
@@ -19,19 +18,19 @@ const ExploreTech = () => {
       });
   }, []);
 
-  const handleClick = (id, category) => {
-    const isExist = stack.find((card) => card.category === category);
+  const handleClick = (id, name) => {
+    const isExist = stack.find((card) => card.id === id);
     if (isExist) {
-      return toast.warn(`1/1 ${category} category already selected`);
+      return toast.warn(`${name} already in Stack!`);
     }
     const selectedTech = data.find((card) => card.id === id);
     setStack([...stack, selectedTech]);
-    return toast.success("Tech added.");
+    return toast.success("Tech Added!");
   };
 
   const handleDelete = (id) => {
     setStack(stack.filter((tech) => tech.id !== id));
-    toast.success("Tech removed.");
+    toast.success("Removed Successfully");
   };
 
   const handleReset = () => {
@@ -59,7 +58,11 @@ const ExploreTech = () => {
             data.map((card) => (
               <div
                 key={card.id}
-                className="bg-surface-raised border border-border-bright rounded-xl p-4 flex flex-col justify-between"
+                className={`bg-surface-raised border ${
+                  stack.some((tech) => tech.id === card.id)
+                    ? "border-[#db2777]"
+                    : "border-border-bright"
+                } rounded-xl p-4 flex flex-col justify-between`}
               >
                 <div className="flex justify-between items-center">
                   <img
@@ -94,12 +97,18 @@ const ExploreTech = () => {
                   </div>
                 </div>
 
-                <button
-                  className="text-white bg-zinc-800 border border-zinc-600 w-full py-2.5 mt-5 rounded-lg font-semibold cursor-pointer hover:bg-zinc-700 transition-colors "
-                  onClick={() => handleClick(card.id, card.category)}
-                >
-                  Add to Stack
-                </button>
+                {stack.some((tech) => tech.id === card.id) ? (
+                  <button className="text-[#db2777] bg-zinc-800 border border-[#db2777] w-full py-2.5 mt-5 rounded-lg font-semibold hover:bg-zinc-700 transition-colors cursor-not-allowed">
+                    ✔️ Added in stack
+                  </button>
+                ) : (
+                  <button
+                    className="text-white bg-zinc-800 border border-zinc-600 w-full py-2.5 mt-5 rounded-lg font-semibold cursor-pointer hover:bg-zinc-700 transition-colors "
+                    onClick={() => handleClick(card.id, card.name)}
+                  >
+                    Add to Stack
+                  </button>
+                )}
               </div>
             ))
           )}
